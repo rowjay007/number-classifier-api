@@ -1,10 +1,10 @@
 package main
 
 import (
-	"log"
-
 	"github.com/gin-gonic/gin"
 	"github.com/rowjay007/number-classifier-api/routes"
+	"log"
+	"os"
 )
 
 func main() {
@@ -17,7 +17,10 @@ func main() {
 
 	routes.RegisterRoutes(r)
 
-	port := "8080"
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" 
+	}
 	log.Println("Server is running on port " + port)
 	r.Run(":" + port)
 }
